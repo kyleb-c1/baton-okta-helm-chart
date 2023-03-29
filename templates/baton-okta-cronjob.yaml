@@ -1,0 +1,31 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "baton-okta.fullname" . }}
+  namespace: {{ .Values.namespace }}
+spec:
+  schedule: {{ .Values.schedule }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: {{ include "baton-okta.fullname" . }}
+            image: "conductorone/baton-okta:latest"
+            env:
+            - name: OKTA_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baton-okta.fullname" . }}-secrets
+                  key: okta-api-token
+            - name: OKTA_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baton-okta.fullname" . }}-secrets
+                  key: okta-domain
+            - name: S3_FILE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baton-okta.fullname" . }}-secrets
+                  key: s3-file-uri
+          restartPolicy: OnFailure

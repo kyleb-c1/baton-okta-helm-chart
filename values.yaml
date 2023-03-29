@@ -1,0 +1,10 @@
+namespace: baton-okta
+
+okta:
+  apiToken: ""
+  domain: ""
+
+s3:
+  fileUri: ""
+
+schedule: "*/5 * * * *"

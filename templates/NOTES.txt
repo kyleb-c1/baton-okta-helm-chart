@@ -1,0 +1,5 @@
+Baton-Okta cron job has been installed.
+
+Use the following command to inspect the cron job:
+
+  $ kubectl -n {{ .Values.namespace }} get cronjob {{ include "baton-okta.fullname" . }}
