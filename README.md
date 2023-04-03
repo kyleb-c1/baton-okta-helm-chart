@@ -40,7 +40,7 @@ Follow these steps to deploy the Baton-Okta Helm chart:
 1.  Package the chart:
 
 ```
-$ helm package baton-okta`
+$ helm package baton-okta
 ```
 
 Install the chart:
@@ -49,6 +49,12 @@ Install the chart:
 $ helm install baton-okta ./baton-okta-0.1.0.tgz --namespace <NAMESPACE> --set okta.apiToken=<OKTA_API_TOKEN> --set okta.domain=<OKTA_DOMAIN> --set s3.fileUri=<S3_FILE_URI> [--set schedule=<CRON_JOB_SCHEDULE>]
 ```
 Replace `<NAMESPACE>`, `<OKTA_API_TOKEN>`, `<OKTA_DOMAIN>`, `<S3_FILE_URI>`, and optionally `<CRON_JOB_SCHEDULE>` with the corresponding values.
+
+Example `helm install`: 
+
+```
+$ helm install baton-okta ./baton-okta-0.1.0.tgz --namespace baton-okta --set okta.apiToken=fake_api_key --set okta.domain=okta.fake.domain --set s3.fileUri=s3://fake_s3_bucket --set schedule="*/5 * * * *" --create-namespace
+```
 
 Verify the deployment:
 
